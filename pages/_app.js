@@ -1,7 +1,49 @@
-import '../styles/globals.css'
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { AlurakutStyles } from "../src/lib/AluracutCommons";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const GlobalStyles = createGlobalStyle`
+/* Reset Css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-export default MyApp
+body {  
+  font-family: sans-serif;
+  background-color: #d9e6f6;
+}
+
+#__next {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+${AlurakutStyles}
+`;
+
+const theme = {
+  colors: {
+    primary: "red",
+  },
+};
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <GlobalStyles />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
+  );
+}
+
+export default MyApp;
